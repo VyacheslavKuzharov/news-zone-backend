@@ -29,6 +29,6 @@ WORKDIR $APP_HOME
 
 ADD Gemfile* $APP_HOME/
 RUN bundle install
-CMD [ "yarn" ]
+CMD [ "yarn install" ]
 
 ADD . $APP_HOME
