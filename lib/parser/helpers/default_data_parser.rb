@@ -1,6 +1,6 @@
 module Parser
-  module Mytaganrog
-    class MytaganrogData
+  module Helpers
+    class DefaultDataParser
       include Parser::Helpers::Methods
 
       def initialize(agent)
@@ -22,12 +22,12 @@ module Parser
 
         info[:news][:title] = page.search(options[:title]).text.strip
         info[:news][:date] = page.search(options[:date]).text.strip
-        info[:news][:description] = page.search(options[:description]).text.strip
+        info[:news][:description] = page.search(options[:description]).text.strip.delete("\r").delete("\n").delete("\t")
         info[:news][:city_id] = get_city_id(info[:news][:title])
 
         image_node = page.search(options[:image])
 
-        if image_node.present? && image_node.attr('class').present? && image_node.attr('class').value  == 'img'
+        if image_node.present? && image_node.attr('class').present? && image_node.attr('class').value == 'img'
           span_img = image_node.attr('style').value
           info[:news][:remote_image_url] = span_img.slice!(/http.*jpg/)
           info[:photos][:remote_photo_url] = [ info[:news][:remote_image_url] ]

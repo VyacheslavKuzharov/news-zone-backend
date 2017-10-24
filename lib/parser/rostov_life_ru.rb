@@ -1,5 +1,5 @@
 module Parser
-  class MytaganrogCom < BaseParser
+  class RostovLifeRu < BaseParser
     attr_reader :site, :last_date
 
     def initialize(site, last_date)
@@ -12,12 +12,11 @@ module Parser
       is_break = false
 
       # Get total pages on target site
-      count_pages = scraper.total_count_pages( site.url, container[:paginate] )
+      count_pages = scraper.total_count_pages("#{site.url}nenovosti/posts", container[:paginate])
 
       # Get news from all pages on target site
       count_pages.times do |i|
-        # Find news urls on the current page
-        links = scraper.get_page_links("#{site.url}/?page=#{i}", container[:link] )
+        links = scraper.get_page_links("#{site.url}/nenovosti/posts?page=#{i+1}", container[:link])
 
         # Get current news data
         links.each do |link|
@@ -52,12 +51,12 @@ module Parser
 
     def container
       {
-          paginate: 'div#main-wrapper div#main-content div.item-list ul.pager li.pager-last a',
-          link: 'div#main-content div.block-content div.article h2.node-title a',
-          title: 'div#main-wrapper div#main-content h1#page-title',
-          image: 'div#main-content div.region-content div#block-system-main div.field-items p.rtecenter img',
-          date: 'div#main-content div.footer span.pubdate',
-          description: 'div#main-content div.region-content div#block-system-main div.field-items div.field-item p'
+          paginate: 'article.b-content div.b-content__main div.b-pagination a:last',
+          link: 'article.b-content div.b-content__main article.n-grid__column a',
+          title: 'article.b-content h1.b-title',
+          image: 'div.n-post-plate__pic2 span.img',
+          date: 'article.b-content small.n-post-plate__panel__date',
+          description: 'article.b-content section.n-post div.n-post__text'
       }
     end
   end
