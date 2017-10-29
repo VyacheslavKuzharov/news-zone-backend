@@ -2,8 +2,6 @@ module Parser
   class BaseParser
     I18n.locale = :ru
 
-    attr_reader :agent
-
     def region(name)
       @region ||= Region.find_by_name(name)
     end
@@ -17,7 +15,7 @@ module Parser
       photos[:remote_photo_url].each { |photo| record.photos.create(remote_photo_url: photo) } unless photos[:remote_photo_url].nil?
       p "news and photos for: #{record.title}, is saved..."
     rescue ActiveRecord::RecordInvalid => e
-      Rails.logger.error "Parser::BaseScraper ERROR! Message: #{e}."
+      Rails.logger.error "Parser::BaseParser ERROR! Message: #{e}."
     end
   end
 end

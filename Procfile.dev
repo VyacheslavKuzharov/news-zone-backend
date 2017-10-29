@@ -1,2 +1,2 @@
-web: bundle exec puma -C config/puma.rb
+web: rm -f /opt/app/tmp/pids/server.pid && rails s -p 5000 -b '0.0.0.0'
 webpack_dev_server: ./bin/webpack-dev-server
