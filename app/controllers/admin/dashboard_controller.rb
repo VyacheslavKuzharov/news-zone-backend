@@ -1,7 +1,7 @@
 module Admin
   class DashboardController < Admin::AdminController
     def index
-      @qwer = 'from dashboard'
+      @qwer = current_user.inspect
     end
   end
 end

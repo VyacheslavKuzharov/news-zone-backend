@@ -6,7 +6,10 @@
 //
 // To reference this file, add <%= javascript_pack_tag 'bundle' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
+// JS libraries
+import "jquery"
 import $ from 'jquery'
+import 'bootstrap/dist/js/bootstrap';
 
 
 console.log('Hello World from Webpacker')

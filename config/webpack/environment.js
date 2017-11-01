@@ -7,7 +7,8 @@ environment.plugins.set(
     new webpack.ProvidePlugin({
         $: 'jquery',
         jQuery: 'jquery',
-        jquery: 'jquery'
+        jquery: 'jquery',
+        Popper: ['popper.js', 'default']
     })
 );
 

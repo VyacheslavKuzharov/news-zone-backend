@@ -1,0 +1,24 @@
+!!!
+%html
+  %head
+    %meta{content: 'text/html; charset=UTF-8', 'http-equiv' => 'Content-Type'}/
+    %title= content_for?(:title) ? yield(:title) : 'News'
+
+    = csrf_meta_tags
+    = stylesheet_pack_tag 'application', media: 'all'
+    = javascript_include_tag 'application'
+    = javascript_pack_tag 'bundle'
+  %body{class: markup_for_admin }
+    = flash_messages!
+    - if user_signed_in? && current_user.admin?
+      = render partial: 'layouts/header'
+      .container-fluid
+        .row
+          = render partial: 'layouts/sidebar'
+          .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+            = yield
+    - else
+      .container
+        .row
+          .col-md-6
+            = yield
