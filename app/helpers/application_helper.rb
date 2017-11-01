@@ -12,7 +12,7 @@ module ApplicationHelper
                 type
             end
       content_tag(:div, class: 'container', id: 'flash-messages' ) do
-        content_tag(:div, class: "alert alert-#{key}", role: 'alert') do
+        content_tag(:div, class: "alert alert-#{key} text-center", role: 'alert') do
           concat(massage)
           concat(content_tag(:a, raw('&#215;'),  href: '#', class:'close', data: { dismiss: 'alert' } ))
         end
