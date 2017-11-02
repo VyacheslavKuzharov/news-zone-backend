@@ -31,7 +31,7 @@ module Admin
 
       respond_to do |format|
         if @admin_news.save
-          format.html { redirect_to @admin_news, notice: 'News was successfully created.' }
+          format.html { redirect_to [:admin, @admin_news], notice: 'News was successfully created.' }
         else
           format.html { render :new }
         end
