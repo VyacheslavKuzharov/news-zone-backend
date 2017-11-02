@@ -1,0 +1,37 @@
+%h1 News
+.form-group
+  = link_to 'New News', new_admin_news_path, class: 'btn btn-default'
+
+.table-responsive
+  %table.table.table.table-striped
+    %thead
+      %tr
+        %th id
+        %th Title
+        %th Date
+        %th URL
+        %th Region
+        %th Top
+        %th Image
+        %th created_at
+        %th
+    %tbody
+      - @admin_news.each do |news|
+        %tr
+          %td= news.id
+          %td= link_to news.title, admin_news_path(news.id)
+          %td= news.date.strftime('%d/%m/%Y') rescue nil
+          %td= link_to news.site.name, news.url
+          %td= news.region.name
+          %td
+            %span{class: "glyphicon glyphicon-#{news.in_top ? 'ok' : 'remove' }", aria:{ hidden: 'true' } }
+
+          %td= image_tag(news.image_url(:small), width: 70, height: 70)
+          %td= news.created_at.strftime('%d/%m/%Y')
+          %td
+            = link_to 'Edit', edit_admin_news_path(news), class: 'btn btn-default btn-xs'
+            = link_to 'Destroy', admin_news_path(news.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-xs'
+
+.row
+  .container.text-center
+    = paginate @admin_news
