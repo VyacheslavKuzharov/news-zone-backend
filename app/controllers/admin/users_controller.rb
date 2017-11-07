@@ -71,5 +71,4 @@ module Admin
       params.require(:user).permit(:email, :role)
     end
   end
-
 end
