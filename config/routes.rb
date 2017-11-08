@@ -13,4 +13,12 @@ Rails.application.routes.draw do
     resources :news
     resources :users
   end
+
+  namespace :api do
+    namespace :v1 do
+      resources :news do
+        get 'photos', action: 'news_photos', on: :member
+      end
+    end
+  end
 end
