@@ -17,10 +17,6 @@ module Api
       render json: Api::ErrorPayload.new(identifier, status, attr), status: status
     end
 
-    def error_401!(msg)
-      throw_error!(401, 'NotAuthorizedError', msg)
-    end
-
     def type_for(e)
       e.is_a?(Class) ? e.to_s.split('::').last.underscore : e.class.to_s.underscore
     end
