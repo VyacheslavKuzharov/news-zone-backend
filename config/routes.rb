@@ -14,11 +14,16 @@ Rails.application.routes.draw do
     resources :users
   end
 
-  namespace :api do
-    namespace :v1 do
-      resources :news do
-        get 'photos', action: 'news_photos', on: :member
+  namespace :api, defaults: { format: 'json' } do
+    resources :authentication, only: :create do
+      collection do
+        post 'authenticate', to: 'authentication#authenticate'
+        delete 'logout', to: 'authentication#logout'
       end
+    end
+
+    namespace :v1 do
+      resources :news
     end
   end
 end

@@ -1,7 +1,9 @@
 module Api
   class ApiBaseController < ApplicationController
-    rescue_from StandardError do |e|
-      throw_error!(:internal_server_error, status: :internal_server_error, message: e.message.downcase.capitalize)
+    before_action :authenticate_user!
+
+    rescue_from ActiveRecord::RecordNotFound do |e|
+      throw_error!(:record_not_found, status: :not_found, message: e.message.downcase.capitalize)
     end
 
 
@@ -15,10 +17,12 @@ module Api
       render json: Api::ErrorPayload.new(identifier, status, attr), status: status
     end
 
+    def error_401!(msg)
+      throw_error!(401, 'NotAuthorizedError', msg)
+    end
+
     def type_for(e)
-      e.class.to_s.underscore
-    rescue
-      :internal_server_error
+      e.is_a?(Class) ? e.to_s.split('::').last.underscore : e.class.to_s.underscore
     end
   end
 end

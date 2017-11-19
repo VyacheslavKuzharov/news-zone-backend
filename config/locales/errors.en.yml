@@ -1,5 +1,14 @@
 en:
   errors:
+    register_user_error:
+      title: "Invalid Registration Attributes."
+      detail: "%{message}"
+    authenticate_user_error:
+      title: "Invalid Authentications Attributes."
+      detail: "%{message}"
+    record_not_found:
+      title: "Record Not Found."
+      detail: "%{message}"
     internal_server_error:
       title: "Internal server error."
       detail: "%{message}"

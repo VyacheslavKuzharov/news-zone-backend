@@ -6,6 +6,7 @@ module Api
         news = News.includes([:site, :region])
                    .order('in_top desc, date desc')
                    .page(page)
+        # p "-----current_user----#{current_user.inspect}"
 
         success_response!(news, NewsSerializer, page: page, total_pages: news.total_pages)
       end

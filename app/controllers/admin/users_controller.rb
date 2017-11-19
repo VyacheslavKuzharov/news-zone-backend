@@ -5,9 +5,7 @@ module Admin
     # GET /admin/users
     # GET /admin/users.json
     def index
-      @admin_users = User.all
-                         .order('role asc')
-                         .page(params[:page])
+      @admin_users = User.order('role asc').page(params[:page])
     end
 
     # GET /admin/users/1
