@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  apipie
   devise_for :users,
              path: :admin,
              controllers: {

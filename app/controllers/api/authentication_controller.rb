@@ -1,5 +1,8 @@
 module Api
   class AuthenticationController < Api::ApiBaseController
+    extend Controllers::ApiDoc
+    expose_doc
+
     skip_before_action :authenticate_user!, only: [:authenticate, :create]
 
 

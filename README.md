@@ -8,3 +8,5 @@ Ruby on Rails 5.1.4
 Postgres Database
 Nginx
 Docker
+
+Api Docs available in /apidocs/apipie
